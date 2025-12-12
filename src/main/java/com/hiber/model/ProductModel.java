@@ -6,6 +6,42 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
+@NamedEntityGraph(
+        name = "productWithImages",
+        attributeNodes = @NamedAttributeNode("images")
+)
+@NamedEntityGraph(
+        name = "productsWithBrand",
+        attributeNodes = {
+                @NamedAttributeNode("brand"),
+                @NamedAttributeNode("images")
+        }
+)
+@NamedEntityGraph(
+        name = "productsWithCategory",
+        attributeNodes = {
+                @NamedAttributeNode("category"),
+                @NamedAttributeNode("images")
+        }
+)
+@NamedEntityGraph(
+        name = "productWithTags",
+        attributeNodes = {
+                @NamedAttributeNode("tags"),
+                @NamedAttributeNode("images")
+        }
+)
+@NamedEntityGraph(
+        name = "productDetails",
+        attributeNodes = {
+                @NamedAttributeNode("brand"),
+                @NamedAttributeNode("category"),
+                @NamedAttributeNode("tags"),
+                @NamedAttributeNode("images")
+        }
+)
+
 @Builder
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity

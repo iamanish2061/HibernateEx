@@ -1,11 +1,16 @@
 package com.hiber.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
-@Data
-@Table(name = "product_images")
+@Table(
+        name = "product_images",
+        uniqueConstraints = @UniqueConstraint(
+                columnNames = {"alt", "url"}
+        )
+)
 public class ImageModel {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,8 +19,9 @@ public class ImageModel {
     private String alt;
 
     private String url;
+    private boolean thumbnail;
 
-//    many to one
-//    owner self
-    private Products product;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    private ProductModel product;
 }

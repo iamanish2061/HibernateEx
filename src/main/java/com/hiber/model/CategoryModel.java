@@ -18,7 +18,7 @@ public class CategoryModel {
 
 //    json ignore
     @OneToMany(
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             mappedBy = "category",
             orphanRemoval = true,
             cascade = CascadeType.ALL

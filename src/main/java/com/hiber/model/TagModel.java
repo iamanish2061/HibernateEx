@@ -1,10 +1,7 @@
 package com.hiber.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +20,7 @@ public class TagModel {
     private String name;
 
     //    json ignore
-    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
     private Set<ProductModel> products = new HashSet<>();
 
 }

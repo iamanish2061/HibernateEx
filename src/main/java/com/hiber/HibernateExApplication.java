@@ -2,9 +2,11 @@ package com.hiber;
 
 import com.hiber.model.BrandModel;
 import com.hiber.model.CategoryModel;
+import com.hiber.model.TagModel;
 import com.hiber.repository.BrandRepo;
 import com.hiber.repository.CategoryRepo;
 import com.hiber.repository.ProductRepo;
+import com.hiber.repository.TagRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,18 +35,37 @@ public class HibernateExApplication {
 //        };
 //    }
 
+//    inserting category info
+//    @Bean
+//    CommandLineRunner runner(CategoryRepo repository) {
+//        return args -> {
+//
+//            List<CategoryModel> categoryList = new ArrayList<>();
+//            categoryList.add(new CategoryModel(null,"Smartphone", null));
+//            categoryList.add(new CategoryModel(null, "Laptop", null));
+//            categoryList.add(new CategoryModel(null, "Tablet", null));
+//            categoryList.add(new CategoryModel(null, "Accessories", null));
+//
+//            repository.saveAll(categoryList);
+//        };
+//    }
+
+//    inserting tags info
     @Bean
-    CommandLineRunner runner(CategoryRepo repository) {
+    CommandLineRunner runner(TagRepo repository) {
         return args -> {
 
-            List<CategoryModel> categoryList = new ArrayList<>();
-            categoryList.add(new CategoryModel(null,"Smartphone", null));
-            categoryList.add(new CategoryModel(null, "Laptop", null));
-            categoryList.add(new CategoryModel(null, "Tablet", null));
-            categoryList.add(new CategoryModel(null, "Accessories", null));
+            List<TagModel> tags = new ArrayList<>();
+            tags.add(new TagModel(null,"NewArrival", null));
+            tags.add(new TagModel(null, "Discount", null));
+            tags.add(new TagModel(null, "Popular", null));
+            tags.add(new TagModel(null, "Bestseller", null));
+            tags.add(new TagModel(null, "Featured", null));
 
-            repository.saveAll(categoryList);
+            repository.saveAll(tags);
         };
     }
+
+
 
 }

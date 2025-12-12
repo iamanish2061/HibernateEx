@@ -1,14 +1,17 @@
 package com.hiber.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
 @Table(name = "brand")
-@Data
 public class BrandModel {
 
     @Id
@@ -17,10 +20,29 @@ public class BrandModel {
 
     private String name;
 
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            mappedBy = "brand"
+    )
+//            json ignore
+    Set<ProductModel> products = new HashSet<>();
 
-//    one to many mapping
-//    owner (mapped by products)
-    Set<Products> products = new HashSet<>();
 
+//    helper methods
+    public void addProduct(ProductModel productModel){
+        if(productModel != null){
+            this.products.add(productModel);
+            productModel.setBrand(this);
+        }
+    }
+
+    public void removeProduct(ProductModel productModel){
+        if(productModel != null){
+            this.products.remove(productModel);
+            productModel.setBrand(null);
+        }
+    }
 
 }

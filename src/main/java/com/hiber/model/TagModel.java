@@ -23,7 +23,7 @@ public class TagModel {
     private String name;
 
     //    json ignore
-    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)
     private Set<ProductModel> products = new HashSet<>();
 
 }

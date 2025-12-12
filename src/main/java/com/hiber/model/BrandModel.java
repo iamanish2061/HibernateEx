@@ -23,7 +23,7 @@ public class BrandModel {
 
 //    json ignore
     @OneToMany(
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             mappedBy = "brand"

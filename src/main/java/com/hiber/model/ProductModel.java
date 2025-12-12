@@ -1,14 +1,12 @@
 package com.hiber.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Builder
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
 @Table(
@@ -47,7 +45,7 @@ public class ProductModel {
 //json ignore
     @ManyToMany(
             fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE, CascadeType.PERSIST}
+            cascade = CascadeType.MERGE
     )
     @JoinTable(
             name = "product_tags",
@@ -75,5 +73,7 @@ public class ProductModel {
             image.setProduct(null);
         }
     }
+
+
 
 }

@@ -11,18 +11,18 @@ import java.util.Set;
 @Table(name = "category")
 public class CategoryModel {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
+//    json ignore
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy = "category",
             orphanRemoval = true,
             cascade = CascadeType.ALL
     )
-//    json ignore
     private Set<ProductModel> products = new HashSet<>();
 
 //    helper methods

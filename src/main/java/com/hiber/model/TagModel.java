@@ -1,23 +1,29 @@
 package com.hiber.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
-@Data
-@Table(name = "tags")
+@Table(
+        name = "tags"
+)
 public class TagModel {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String name;
 
-//    many to many relation
-//    separate table
-    private Set<Products> products = new HashSet<>();
+    //    json ignore
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
+    private Set<ProductModel> products = new HashSet<>();
 
 }

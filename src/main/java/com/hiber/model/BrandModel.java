@@ -15,18 +15,19 @@ import java.util.Set;
 public class BrandModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
+
+//    json ignore
     @OneToMany(
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             mappedBy = "brand"
     )
-//            json ignore
     Set<ProductModel> products = new HashSet<>();
 
 

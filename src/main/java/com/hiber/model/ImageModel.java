@@ -13,7 +13,7 @@ import lombok.*;
 )
 public class ImageModel {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String alt;
@@ -21,6 +21,7 @@ public class ImageModel {
     private String url;
     private boolean thumbnail;
 
+//    json ignore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     private ProductModel product;

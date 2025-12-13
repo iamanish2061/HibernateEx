@@ -2,6 +2,7 @@ package com.hiber.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -76,6 +77,7 @@ public class ProductModel {
             orphanRemoval = true,
             mappedBy = "product"
     )
+    @BatchSize(size = 5)
     private Set<ImageModel> images= new HashSet<>();
 
 //json ignore

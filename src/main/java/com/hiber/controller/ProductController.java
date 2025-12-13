@@ -4,10 +4,10 @@ import com.hiber.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 
-@RequiredArgsConstructor
-@Controller
+//@RequiredArgsConstructor
+//@Controller
 public class ProductController {
 
-    private final ProductService productService;
+//    private final ProductService productService;
 
 }

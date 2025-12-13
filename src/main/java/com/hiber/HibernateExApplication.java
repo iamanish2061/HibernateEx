@@ -5,6 +5,7 @@ import com.hiber.repository.BrandRepo;
 import com.hiber.repository.CategoryRepo;
 import com.hiber.repository.ProductRepo;
 import com.hiber.repository.TagRepo;
+import com.hiber.service.ProductService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -253,23 +254,25 @@ public class HibernateExApplication {
         };
     }
 
+
     @Bean
-    CommandLineRunner runner(ProductRepo productRepo){
-        return args->
+    CommandLineRunner runner(ProductService productService) {
+        return args ->
         {
-            Pageable pageable = PageRequest.of(0,5, Sort.by("id").descending());
+            Pageable pageable = PageRequest.of(0, 5, Sort.by("id").descending());
 
-          Page<ProductModel> products = productRepo.findAllWithImage(pageable);
+            Page<ProductModel> products = productService.getPaginatedProductsWithInitializedImages(pageable);
 
-          products.forEach(
-                  p->{
-                      System.out.println(p.getName());
-                      System.out.println(p.getId());
-                      p.getImages().stream().filter(image-> image.isThumbnail()).forEach(fi-> System.out.println(fi.getAlt()));
-                      System.out.println("------------------------------------------------------------");
-                  }
-          );
-
+            products.getContent().forEach(
+                    p -> {
+                        System.out.println(p.getName());
+                        System.out.println(p.getId());
+                        p.getImages().stream()
+                                .filter(image -> image.isThumbnail())
+                                .forEach(fi -> System.out.println("Alt: " + fi.getAlt()));
+                        System.out.println("------------------------------------------------------------");
+                    }
+            );
         };
     }
 

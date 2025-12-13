@@ -9,6 +9,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -253,13 +257,14 @@ public class HibernateExApplication {
     CommandLineRunner runner(ProductRepo productRepo){
         return args->
         {
-          List<ProductModel> products = productRepo.findByBrandId(1L);
+            Pageable pageable = PageRequest.of(0,5, Sort.by("id").descending());
+
+          Page<ProductModel> products = productRepo.findAllWithImage(pageable);
 
           products.forEach(
                   p->{
-                      BrandModel b = p.getBrand();
-                      System.out.println(b.getName());
                       System.out.println(p.getName());
+                      System.out.println(p.getId());
                       p.getImages().stream().filter(image-> image.isThumbnail()).forEach(fi-> System.out.println(fi.getAlt()));
                       System.out.println("------------------------------------------------------------");
                   }

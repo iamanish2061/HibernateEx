@@ -246,35 +246,35 @@ public class HibernateExApplication {
 //
 //    }
 
-    @Bean
-    CommandLineRunner cr(ProductRepo productRepo){
-        return args -> {
-          ProductModel product = productRepo.findById(2L).orElseThrow(()-> new RuntimeException("error"));
-          System.out.println(product);
-        };
-    }
-
-
-    @Bean
-    CommandLineRunner runner(ProductService productService) {
-        return args ->
-        {
-            Pageable pageable = PageRequest.of(0, 5, Sort.by("id").descending());
-
-            Page<ProductModel> products = productService.getPaginatedProductsWithInitializedImages(pageable);
-
-            products.getContent().forEach(
-                    p -> {
-                        System.out.println(p.getName());
-                        System.out.println(p.getId());
-                        p.getImages().stream()
-                                .filter(image -> image.isThumbnail())
-                                .forEach(fi -> System.out.println("Alt: " + fi.getAlt()));
-                        System.out.println("------------------------------------------------------------");
-                    }
-            );
-        };
-    }
+//    @Bean
+//    CommandLineRunner cr(ProductRepo productRepo){
+//        return args -> {
+//          ProductModel product = productRepo.findById(2L).orElseThrow(()-> new RuntimeException("error"));
+//          System.out.println(product);
+//        };
+//    }
+//
+//
+//    @Bean
+//    CommandLineRunner runner(ProductService productService) {
+//        return args ->
+//        {
+//            Pageable pageable = PageRequest.of(0, 5, Sort.by("id").descending());
+//
+//            Page<ProductModel> products = productService.getPaginatedProductsWithInitializedImages(pageable);
+//
+//            products.getContent().forEach(
+//                    p -> {
+//                        System.out.println(p.getName());
+//                        System.out.println(p.getId());
+//                        p.getImages().stream()
+//                                .filter(image -> image.isThumbnail())
+//                                .forEach(fi -> System.out.println("Alt: " + fi.getAlt()));
+//                        System.out.println("------------------------------------------------------------");
+//                    }
+//            );
+//        };
+//    }
 
 
 
